@@ -21,28 +21,12 @@ const app1 = new Clarifai.App({
 });
 const app=express();
 
-const database = {
-	users : [
-     {
-     	id:'123',
-     	name:'saied',
-     	password: 'saied1998',
-     	email: 'saied2421998@gmail.com',
-     	enteries: 0,
-     	joined :  new Date()
-     }
-	]
-}
 app.use(cors());
 app.use(bodyParser.json())
 app.get('/',(req,res)  => {
-     res.send(database.users)
+     res.send('working!')
 })
 
-//  let hash =  bcrypt.hash(myPlaintextPassword='saied1998', saltRounds, function(err, hash) {
-//       return hash;
-// });
-// console.log(hash)
 
 app.post('/signin',(req,res)  => {
            db('login').select('*').where('email','=',req.body.email)
@@ -97,4 +81,4 @@ app.post('/predict',(req,res)  => {
             .catch(error => res.status(400).json(true))
 })
 
-app.listen(3001)
+app.listen(process.env.PORT || 3001)
