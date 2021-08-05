@@ -35,13 +35,12 @@ app.post('/signin',(req,res)  => {
               .then(user => {
                 res.json(user[0])
               })
-              .catch(error => res.status(400).json('error longing in'))
             }
             else {
-               res.status(400).json('error longing in')
+               res.status(400).json('password is wrong')
             }
            })
-           .catch(error => res.status(400).json('error longing in'))
+           .catch(error => res.status(400).json(`email is wrong or you don't have an account`))
 })
 
 app.post('/register',(req,res)  => {
