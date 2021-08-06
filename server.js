@@ -29,6 +29,15 @@ const smtpTransport = nodemailer.createTransport({
 let rand,mailOptions,host,link;
 
 
+const app=express();
+
+app.use(cors());
+app.use(bodyParser.json())
+app.get('/',(req,res)  => {
+     res.send('working!')
+})
+
+
 //start
 
 app.get('/send',function(req,res){
@@ -75,15 +84,6 @@ else
 });
 
 //end
-const app=express();
-
-app.use(cors());
-app.use(bodyParser.json())
-app.get('/',(req,res)  => {
-     res.send('working!')
-})
-
-
 app.post('/signin',(req,res)  => {
            db('login').select('*').where('email','=',req.body.email)
            .then(data => {
