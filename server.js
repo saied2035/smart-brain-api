@@ -44,6 +44,7 @@ app.get('/send',function(req,res){
         rand=Math.floor((Math.random() * 100) + 54);
     host=req.get('host');
     link="http://"+req.get('host')+"/verify?id="+rand;
+    console.log(req.query)
     mailOptions={
         to : req.query.to,
         subject : "Please confirm your Email account",
