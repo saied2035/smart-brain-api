@@ -58,7 +58,7 @@ app.get('/send',function(req,res){
         res.end("error");
      }else{
             console.log("Message sent: " + response);
-        res.end("sent");
+        res.end(response);
          }
 });
 });
