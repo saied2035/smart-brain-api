@@ -45,7 +45,7 @@ app.get('/send',function(req,res){
     host=req.get('host');
     link="http://"+req.get('host')+"/verify?id="+rand;
     mailOptions={
-        from: "saied2421998@gmail.com",
+        from: "smart-brain",
         to : 'semsem_worldcup_2035@yahoo.com',
         subject : "Please confirm your Email account",
         html : "Hello,Please Click on the link to verify your email.<a href="+
@@ -58,7 +58,7 @@ app.get('/send',function(req,res){
         res.end("error");
      }else{
             console.log("Message sent: " + response);
-        res.end(response);
+        res.end("sent");
          }
 });
 });
