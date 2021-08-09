@@ -48,7 +48,8 @@ app.get('/send',function(req,res){
         from: "saied2421998@gmail.com",
         to : 'semsem_worldcup_2035@yahoo.com',
         subject : "Please confirm your Email account",
-        html : "Hello,Please Click on the link to verify your email."+link+">Click here to verify"
+        html : "Hello,Please Click on the link to verify your email.<a href="+
+        link+">Click here to verify</a>"
     }
     console.log(mailOptions);
     smtpTransport.sendMail(mailOptions, function(error, response){
