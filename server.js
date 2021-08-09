@@ -44,7 +44,6 @@ app.get('/send',function(req,res){
         rand=Math.floor((Math.random() * 100) + 54);
     host=req.get('host');
     link="http://"+req.get('host')+"/verify?id="+rand;
-    console.log(req.query)
     mailOptions={
         from: "saied2421998@gmail.com",
         to : 'semsem_worldcup_2035@yahoo.com',
