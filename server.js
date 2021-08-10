@@ -34,13 +34,10 @@ app.get('/',(req,res)  => {
 
 
 //start
-
+     let rand,mailOptions,host,link
 app.get('/send',function(req,res){
-      const {rand,mailOptions,host,link} = emailVariables()
-      rand= 'hi' 
-      console.log(emailVars,smtpTransport)
-      res.send("test")
-/*        rand=Math.floor((Math.random() * 100) + 54);
+      
+    rand=Math.floor((Math.random() * 100) + 54);
     host=req.get('host');
     link="https://"+req.get('host')+"/verify?id="+rand;
     mailOptions={
@@ -58,7 +55,7 @@ app.get('/send',function(req,res){
      }else{
         res.end("sent");
          }
-});*/
+});
 });
 
 /*app.get('/verify',function(req,res){

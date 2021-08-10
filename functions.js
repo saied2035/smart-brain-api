@@ -8,11 +8,8 @@ const smtpTransport = nodemailer.createTransport({
     }
 });
 
-emailVariables = () => {
-	return {rand:'',mailOptions:'',host:'',link:''};
-}
+
 
 module.exports = {
-	smtpTransport,
-	emailVariables
+	smtpTransport
 }
