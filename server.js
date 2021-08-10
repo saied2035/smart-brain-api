@@ -66,7 +66,7 @@ app.get('/send',function(req,res){
 
 app.get('/verify',function(req,res){
 console.log(req.protocol+":/"+req.get('host'));
-if((req.protocol+"://"+req.get('host'))==("http://"+host))
+if((req.protocol+"://"+req.get('host'))==("https://"+host))
 {
     console.log("Domain is matched. Information is from Authentic email");
     console.log(req.query)
