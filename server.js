@@ -44,7 +44,7 @@ app.get('/',(req,res)  => {
 app.get('/send',function(req,res){
         rand=Math.floor((Math.random() * 100) + 54);
     host=req.get('host');
-    link="http://"+req.get('host')+"/verify?id="+rand;
+    link="https://"+req.get('host')+"/verify?id="+rand;
     mailOptions={
         from: "smart-brain",
         to : 'semsem_worldcup_2035@yahoo.com',
