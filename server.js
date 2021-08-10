@@ -1,12 +1,14 @@
 const express = require('express');
-const nodemailer = require("nodemailer")
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const knex = require('knex');
 
 const Clarifai = require('clarifai');
-
+const {
+  smtpTransport,
+  emailVariables
+} = require('./functions')
 const app1 = new Clarifai.App({
     apiKey: 'aa5f028272e1463088b19faa78ebb744'
 });
@@ -19,14 +21,6 @@ const app1 = new Clarifai.App({
   }
 });
 
-const smtpTransport = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: "saied2421998@gmail.com",
-        pass: "saied1998"
-    }
-});
-let rand,mailOptions,host,link;
 
 
 const app=express();
@@ -42,7 +36,10 @@ app.get('/',(req,res)  => {
 //start
 
 app.get('/send',function(req,res){
-        rand=Math.floor((Math.random() * 100) + 54);
+      const emailVars = emailVariables() 
+      console.log(emailVars,smtpTransport)
+      res.send("test")
+/*        rand=Math.floor((Math.random() * 100) + 54);
     host=req.get('host');
     link="https://"+req.get('host')+"/verify?id="+rand;
     mailOptions={
@@ -60,10 +57,10 @@ app.get('/send',function(req,res){
      }else{
         res.end("sent");
          }
-});
+});*/
 });
 
-app.get('/verify',function(req,res){
+/*app.get('/verify',function(req,res){
 console.log(req.protocol+":/"+req.get('host'));
 if((req.protocol+"://"+req.get('host'))==("https://"+host))
 {
@@ -84,7 +81,7 @@ else
 {
     res.end("Request is from unknown source");
 }
-});
+});*/
 
 //end
 app.post('/signin',(req,res)  => {
