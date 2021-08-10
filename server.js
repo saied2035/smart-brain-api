@@ -22,8 +22,8 @@ const app1 = new Clarifai.App({
 const smtpTransport = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "saied2421998@gmail.com",
-        pass: "saied1998"
+        user: "<saied2421998@gmail.com>",
+        pass: "<saied1998>"
     }
 });
 let rand,mailOptions,host,link;
@@ -58,7 +58,6 @@ app.get('/send',function(req,res){
             console.log(error);
         res.end("error");
      }else{
-            console.log("Message sent: " + response);
         res.end("sent");
          }
 });
