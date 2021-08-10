@@ -46,7 +46,7 @@ app.get('/send',function(req,res){
     host=req.get('host');
     link="https://"+req.get('host')+"/verify?id="+rand;
     mailOptions={
-        from: "Saied Gaffer <saied2421998@gmail.com>",
+        from: "smartbrain <saied2421998@gmail.com>",
         to : 'semsem_worldcup_2035@yahoo.com',
         subject : "Please confirm your Email account",
         html : "Hello,Please Click on the link to verify your email.<a href="+
