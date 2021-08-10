@@ -22,8 +22,8 @@ const app1 = new Clarifai.App({
 const smtpTransport = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "<saied2421998@gmail.com>",
-        pass: "<saied1998>"
+        user: "Saied Gaffer",
+        pass: "saied1998"
     }
 });
 let rand,mailOptions,host,link;
@@ -46,7 +46,7 @@ app.get('/send',function(req,res){
     host=req.get('host');
     link="https://"+req.get('host')+"/verify?id="+rand;
     mailOptions={
-        from: "smart-brain",
+        from: "saied2421998@gmail.com",
         to : 'semsem_worldcup_2035@yahoo.com',
         subject : "Please confirm your Email account",
         html : "Hello,Please Click on the link to verify your email.<a href="+
