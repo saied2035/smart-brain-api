@@ -36,8 +36,8 @@ app.get('/',(req,res)  => {
 //start
 
 app.get('/send',function(req,res){
-      const emailVars = emailVariables()
-      emailVars.rand= 'hi' 
+      const {rand,mailOptions,host,link} = emailVariables()
+      rand= 'hi' 
       console.log(emailVars,smtpTransport)
       res.send("test")
 /*        rand=Math.floor((Math.random() * 100) + 54);
