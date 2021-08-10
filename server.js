@@ -33,6 +33,7 @@ const app=express();
 
 app.use(cors());
 app.use(bodyParser.json())
+app.enable('trust proxy')
 app.get('/',(req,res)  => {
      res.send('working!')
 })
