@@ -58,7 +58,7 @@ app.get('/send',function(req,res){
 });
 });
 
-/*app.get('/verify',function(req,res){
+app.get('/verify',function(req,res){
 console.log(req.protocol+":/"+req.get('host'));
 if((req.protocol+"://"+req.get('host'))==("https://"+host))
 {
@@ -79,7 +79,7 @@ else
 {
     res.end("Request is from unknown source");
 }
-});*/
+});
 
 //end
 app.post('/signin',(req,res)  => {
