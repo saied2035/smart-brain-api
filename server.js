@@ -121,7 +121,10 @@ app.post('/register',(req,res)  => {
                     .catch(trx.rollback)
 
                  })
-                 .catch(error => res.status(400).json('error register'))   
+                 .catch(error => {
+                  console.log(error)
+                  res.status(400).json(error)
+                })   
 })
 
 app.post('/predict',(req,res)  => {
