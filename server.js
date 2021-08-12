@@ -17,6 +17,7 @@ const app1 = new Clarifai.App({
 	  ssl: {
 	    rejectUnauthorized: false
 	  }
+  }
 });
 
 
