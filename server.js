@@ -5,10 +5,7 @@ const bodyParser = require('body-parser');
 const knex = require('knex');
 
 const Clarifai = require('clarifai');
-const {
-  smtpTransport,
-  emailVariables
-} = require('./functions')
+const {smtpTransport} = require('./functions')
 const app1 = new Clarifai.App({
     apiKey: 'aa5f028272e1463088b19faa78ebb744'
 });
@@ -27,7 +24,7 @@ const app=express();
 
 app.use(cors());
 app.use(bodyParser.json())
-app.enable('trust proxy')
+/*app.enable('trust proxy')*/
 app.get('/',(req,res)  => {
      res.send('working!')
 })
