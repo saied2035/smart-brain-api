@@ -137,4 +137,9 @@ app.post('/predict',(req,res)  => {
             .catch(error => res.status(400).json(true))
 })
 
+app.post('/test',(req,res)  => {
+      db('login').select('*').then(console.log)
+      res.json('success')
+})
+
 app.listen(process.env.PORT || 3001)
