@@ -26,7 +26,7 @@ const app=express();
 
 app.use(cors());
 app.use(bodyParser.json())
-/*app.enable('trust proxy')*/
+app.enable('trust proxy')
 app.get('/',(req,res)  => {
      res.send('working!')
 })
@@ -82,6 +82,9 @@ else
 
 //end
 app.post('/signin',(req,res)  => {
+           if(!req.body.email.length && !req.body.password.length){
+            res.status(400).json(`Please, insert your email & password`)
+           }
            db('login').select('*').where('email','=',req.body.email)
            .then(data => {
             const isValid= bcrypt.compareSync(req.body.password, data[0].hash);
