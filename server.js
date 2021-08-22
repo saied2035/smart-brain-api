@@ -116,7 +116,6 @@ app.post('/register',(req,res)  => {
                            .returning('*')
                            .then(user => res.json(user[0]))
                     })
-                    .
                     .then(trx.commit)
                     .catch(trx.rollback)
 
