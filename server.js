@@ -82,16 +82,13 @@ else
 
 //end
 app.post('/signin',(req,res)  => {
-           if(!req.body.email.length && !req.body.password.length){
-            res.status(400).json(`Please, insert your email & password`)
-           }
            db('login').select('*').where('email','=',req.body.email)
            .then(data => {
             const isValid= bcrypt.compareSync(req.body.password, data[0].hash);
             if (isValid){
              return db('users').select('*').where('email','=',req.body.email)
               .then(user => {
-                res.json(user[0])
+                return res.json(user[0])
               })
             }
             else {
@@ -119,6 +116,7 @@ app.post('/register',(req,res)  => {
                            .returning('*')
                            .then(user => res.json(user[0]))
                     })
+                    .
                     .then(trx.commit)
                     .catch(trx.rollback)
 
