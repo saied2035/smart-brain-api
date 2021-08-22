@@ -82,6 +82,9 @@ else
 
 //end
 app.post('/signin',(req,res)  => {
+           if(Object.values(req.body).includes("")){
+             return res.json('please complete all the fields')
+           }
            db('login').select('*').where('email','=',req.body.email)
            .then(data => {
             const isValid= bcrypt.compareSync(req.body.password, data[0].hash);
