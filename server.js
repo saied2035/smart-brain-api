@@ -102,9 +102,9 @@ app.post('/signin',(req,res)  => {
 })
 
 app.post('/register',(req,res)  => {
-  
+
                if(Object.values(req.body).includes("")){
-               return res.json('please complete all the fields')
+                return res.json('please complete all the fields')
                }
                const {email,name,password} = req.body;
                const hash = bcrypt.hashSync(password, 10);
@@ -113,6 +113,7 @@ app.post('/register',(req,res)  => {
                          email : email,
                          hash : hash
                     })
+                    .catch(error => res.status(400).json(`email is already existed`))
                     .returning('email')
                     .then( registerEmail => {
                            return trx('users').insert({
@@ -127,10 +128,7 @@ app.post('/register',(req,res)  => {
                     .catch(trx.rollback)
 
                  })
-                 .catch(error => {
-                  console.log(error)
-                  res.status(400).json(error)
-                })   
+                 .catch(error => res.status(400).json(`you can't register now,server is geting maintance`))   
 })
 
 app.post('/predict',(req,res)  => {
