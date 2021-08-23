@@ -102,6 +102,10 @@ app.post('/signin',(req,res)  => {
 })
 
 app.post('/register',(req,res)  => {
+  
+               if(Object.values(req.body).includes("")){
+               return res.json('please complete all the fields')
+               }
                const {email,name,password} = req.body;
                const hash = bcrypt.hashSync(password, 10);
                  db.transaction( trx => {
