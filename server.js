@@ -2,23 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
-const knex = require('knex');
-
 const Clarifai = require('clarifai');
-const {smtpTransport} = require('./functions')
+const {db,smtpTransport,checkPass} = require('./functions')
 const app1 = new Clarifai.App({
     apiKey: 'aa5f028272e1463088b19faa78ebb744'
 });
 
- const db = knex({
-  client: 'pg',
-  connection: {
-	  connectionString: process.env.DATABASE_URL,
-	  ssl: {
-	    rejectUnauthorized: false
-	  }
-  }
-});
+
 
 
 
@@ -107,6 +97,7 @@ app.post('/register',(req,res)  => {
                 return res.json('please complete all the fields')
                }
                const {email,name,password} = req.body;
+               
                const hash = bcrypt.hashSync(password, 10);
                  db.transaction( trx => {
                     trx('login').insert({
@@ -148,6 +139,9 @@ app.post('/predict',(req,res)  => {
 app.post('/test',(req,res)  => {
       db('login').select('*').then(console.log)
       res.json('success')
+})
+app.get('/test',(req,res) => {
+   checkPass()
 })
 
 app.listen(process.env.PORT || 3001)
