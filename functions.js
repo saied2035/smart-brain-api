@@ -23,7 +23,7 @@ const checkPass = (pass) => {
                db('login').select('hash').then( data => {
                    const existedPasswords= data.filter( user => {
                	     return bcrypt.compareSync(pass,user.hash) === true
-               	   }
+               	   })
                	   console.log(existedPasswords)
                })
               
