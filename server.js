@@ -147,8 +147,7 @@ app.get('/test',(req,res) => {
           process.exit(0)
       }
 
-     })
-      res.json('success')
+     }).then(() => res.json('success'))
 /*   const isValid = checkPass('saied1998')
    console.log(isValid)
    return isValid ?
