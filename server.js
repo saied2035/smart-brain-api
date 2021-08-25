@@ -144,16 +144,13 @@ app.get('/test',(req,res) => {
      checkPass('saied1998').then((isValid) => {
       if(!isValid){
           res.json('password is already existed').end()
-          process.exit(0)
+          
       }
+      else{
+        res.json('success')
+      } 
+     })
 
-     }).then(() => res.json('success'))
-/*   const isValid = checkPass('saied1998')
-   console.log(isValid)
-   return isValid ?
-     res.json('you are clear your password is unique')
-   :
-     res.json('password are already existed') */ 
 })
 
 app.listen(process.env.PORT || 3001)
