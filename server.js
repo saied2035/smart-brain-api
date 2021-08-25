@@ -121,6 +121,7 @@ app.post('/register',(req,res)  => {
                               name: name,
                               joined: new Date()
                            })
+                           .catch(error => res.status(400).json(`username is already existed`))
                            .returning('*')
                            .then(user => res.json(user[0]))
                     })
@@ -128,7 +129,9 @@ app.post('/register',(req,res)  => {
                     .catch(trx.rollback)
 
                  })
-                 .catch(error => res.status(400).json(`you can't register now,server is geting maintance`))   
+                 .catch(error => {
+                  console.log(error)
+                  res.status(400).json(`you can't register now,server is geting maintance`)})   
 })
 
 app.post('/predict',(req,res)  => {
