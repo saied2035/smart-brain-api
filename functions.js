@@ -25,6 +25,7 @@ const checkPass = (pass) => {
                	     return bcrypt.compareSync(pass,user.hash) === true
                	   })
                	   console.log(existedPasswords)
+               	   return existedPasswords
                })
               
 }

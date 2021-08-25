@@ -141,7 +141,8 @@ app.post('/predict',(req,res)  => {
       res.json('success')
 })*/
 app.get('/test',(req,res) => {
-      checkPass('saied1998')
+      const reslut = checkPass('saied1998')
+       console.log(reslut)
       res.json('success')
 /*   const isValid = checkPass('saied1998')
    console.log(isValid)
