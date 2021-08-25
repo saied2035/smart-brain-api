@@ -141,7 +141,7 @@ app.post('/predict',(req,res)  => {
       res.json('success')
 })*/
 app.get('/test',(req,res) => {
-   checkPass()
+   checkPass('saied1998')
    res.json('success')
 })
 

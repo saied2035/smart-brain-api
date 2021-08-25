@@ -19,7 +19,7 @@ const smtpTransport = nodemailer.createTransport({
     }
 });
 
-const checkPass = async () => {
+const checkPass = async (pass) => {
                data = await db('login').select('hash')
                const isValid = data.filter((user) => {
                	   return bcrypt.compareSync(pass,user.hash) = true
