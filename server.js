@@ -142,6 +142,7 @@ app.post('/predict',(req,res)  => {
 })*/
 app.get('/test',(req,res) => {
    const isValid = checkPass('saied1998')
+   console.log(isValid)
    return isValid ?
      res.json('you are clear your password is unique')
    :
