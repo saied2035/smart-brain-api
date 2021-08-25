@@ -25,7 +25,7 @@ const checkPass = async (pass) => {
                	   return bcrypt.compareSync(pass,user.hash) === true
                }) 
               
-               return existedPasswords.length > 0 ?
+               return existedPasswords.length ?
                   false   
                :
                   true
