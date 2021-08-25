@@ -96,34 +96,43 @@ app.post('/register',(req,res)  => {
                if(Object.values(req.body).includes("")){
                 return res.json('please complete all the fields')
                }
-               const {email,name,password} = req.body;
-               
-               const hash = bcrypt.hashSync(password, 10);
-                 db.transaction( trx => {
-                    trx('login').insert({
-                         email : email,
-                         hash : hash
-                    })
-                    .returning('email')
-                    .catch(error => res.status(400).json(`email is already existed`))
-                    .then( registerEmail => {
-                           return trx('users').insert({
-                              email:registerEmail[0],
-                              name: name,
-                              joined: new Date()
-                           })
-                           .returning('*')
-                           .catch(error => res.status(400).json(`username is already existed`))
-                           .then(user => res.json(user[0]))
-                           
-                    })
-                    .then(trx.commit)
-                    .catch(trx.rollback)
 
-                 })
-                 .catch(error => {
-                  console.log(error)
-                  res.status(400).json(`you can't register now,server is geting maintance`)})   
+               const {email,name,password} = req.body;
+               checkPass(password).then( isValid => {
+                    if(!isValid){
+                        res.json('password is already existed').end()
+                        
+                    }
+                    else {
+                         const hash = bcrypt.hashSync(password, 10);
+                           db.transaction( trx => {
+                              trx('login').insert({
+                                   email : email,
+                                   hash : hash
+                              })
+                              .returning('email')
+                              .catch(error => res.status(400).json(`email is already existed`))
+                              .then( registerEmail => {
+                                     return trx('users').insert({
+                                        email:registerEmail[0],
+                                        name: name,
+                                        joined: new Date()
+                                     })
+                                     .returning('*')
+                                     .catch(error => res.status(400).json(`username is already existed`))
+                                     .then(user => res.json(user[0]))
+                                     
+                              })
+                              .then(trx.commit)
+                              .catch(trx.rollback)
+
+                           })
+                           .catch(error => {
+                            console.log(error)
+                            res.status(400).json(`you can't register now,server is geting maintance`)})                      
+                    }
+                }) 
+   
 })
 
 app.post('/predict',(req,res)  => {
