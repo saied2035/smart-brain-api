@@ -141,12 +141,14 @@ app.post('/predict',(req,res)  => {
       res.json('success')
 })*/
 app.get('/test',(req,res) => {
-   const isValid = checkPass('saied1998')
+      checkPass('saied1998')
+      res.json('success')
+/*   const isValid = checkPass('saied1998')
    console.log(isValid)
    return isValid ?
      res.json('you are clear your password is unique')
    :
-     res.json('password are already existed')  
+     res.json('password are already existed') */ 
 })
 
 app.listen(process.env.PORT || 3001)
