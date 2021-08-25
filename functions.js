@@ -22,7 +22,7 @@ const smtpTransport = nodemailer.createTransport({
 const checkPass = async () => {
                passwords = await db('login').select('hash')
                console.log(passwords)
-               res.json('success')
+               
 }
 
 
