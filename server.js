@@ -145,11 +145,9 @@ app.get('/test',(req,res) => {
       if(!isValid){
           return res.json('password is already existed')
       }
-      else{
-        res.json('success')
-      }       
      })
       
+      return res.json('success')
 /*   const isValid = checkPass('saied1998')
    console.log(isValid)
    return isValid ?
