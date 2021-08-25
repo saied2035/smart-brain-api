@@ -141,7 +141,7 @@ app.post('/predict',(req,res)  => {
       res.json('success')
 })*/
 app.get('/test', (req,res) => {
-      const reslut = Promise.resolve(checkPass('saied1998'))
+      const reslut = (async () => await checkPass('saied1998'))()
        console.log(reslut)
       res.json('success')
 /*   const isValid = checkPass('saied1998')
