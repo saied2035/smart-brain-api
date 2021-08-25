@@ -143,7 +143,7 @@ app.post('/predict',(req,res)  => {
 app.get('/test',(req,res) => {
      checkPass('saied199').then((isValid) => {
       if(!isValid){
-          res.json('password is already existed')
+          return res.json('password is already existed')
       }       
      }).then(() => res.json('success') )
       
