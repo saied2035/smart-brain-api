@@ -24,7 +24,7 @@ const checkPass = async (pass) => {
                const existedPasswords = data.filter((user) => {
                	   return bcrypt.compareSync(pass,user.hash) === true
                }) 
-               console.log(existedPasswords,existedPasswords.length)
+               console.log(existedPasswords,!existedPasswords.length)
                return !existedPasswords.length ?
                   true   
                :
