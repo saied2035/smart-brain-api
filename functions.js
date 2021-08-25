@@ -21,7 +21,7 @@ const smtpTransport = nodemailer.createTransport({
 
 const checkPass = async (pass) => {
                data = await db('login').select('hash')
-               return pass(data)
+               return data
 }
 
 

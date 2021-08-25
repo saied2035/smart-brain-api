@@ -140,8 +140,8 @@ app.post('/predict',(req,res)  => {
       db('login').select('*').then(console.log)
       res.json('success')
 })*/
-app.get('/test',(req,res) => {
-      const reslut = checkPass('saied1998')
+app.get('/test', async (req,res) => {
+      const reslut = await checkPass('saied1998')
        console.log(reslut)
       res.json('success')
 /*   const isValid = checkPass('saied1998')
