@@ -21,11 +21,7 @@ const smtpTransport = nodemailer.createTransport({
 
 const checkPass = async (pass) => {
                data = await db('login').select('hash')
-               const existedPasswords = data.filter((user) => {
-               	   return bcrypt.compareSync(pass,user.hash) === true
-               }) 
-              
-               return Promise.resolve(existedPasswords)
+               return Promise.resolve(data)
 }
 
 
