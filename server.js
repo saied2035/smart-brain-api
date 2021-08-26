@@ -120,7 +120,10 @@ app.post('/register',(req,res)  => {
                                         joined: new Date()
                                      })
                                      .returning('*')
-                                     .catch(error => res.status(400).json(`username is already existed`))
+                                     .catch(error => {
+                                         console.log(error)
+                                         res.status(400).json(`username is already existed`)
+                                    })
                                      .then(user => res.json(user[0]))
                                      
                               })
