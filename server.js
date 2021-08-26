@@ -113,6 +113,7 @@ app.post('/register',(req,res)  => {
                               .returning('id','email')
                               .catch(error => res.status(400).json(`email is already existed`))
                               .then( data => {
+                                     console.log(data)
                                      return trx('users').insert({
                                         id: data[0].id,
                                         email:data[0].email,
