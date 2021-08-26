@@ -110,20 +110,20 @@ app.post('/register',(req,res)  => {
                                    email : email,
                                    hash : hash
                               })
-                              .returning('email')
-                              // .catch(error => res.status(400).json(`email is already existed`))
-                              .then( registerEmail => {
+                              .returning('id','email')
+                              .catch(error => res.status(400).json(`email is already existed`))
+                              .then( data => {
                                      return trx('users').insert({
-                                        email:registerEmail[0],
+                                        id: data[0].id,
+                                        email:data[0].email,
                                         name: name,
                                         joined: new Date()
                                      })
                                      .returning('*')
-                                     // .catch(error => res.status(400).json(`username is already existed`))
+                                     .catch(error => res.status(400).json(`username is already existed`))
                                      .then(user => res.json(user[0]))
                                      
                               })
-                              .catch(err => console.log(err))
                               .then(trx.commit)
                               .catch(trx.rollback)
 
