@@ -110,7 +110,7 @@ app.post('/register',(req,res)  => {
                                    email : email,
                                    hash : hash
                               })
-                              .returning("id","email")
+                              .returning("*")
                               .catch(error => res.status(400).json(`email is already existed`))
                               .then( data => {
                                      console.log(data)
