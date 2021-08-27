@@ -3,7 +3,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const Clarifai = require('clarifai');
-const {db,smtpTransport,checkPass} = require('./functions')
+const {db,smtpTransport,checkPass,validatePass} = require('./functions')
 const app1 = new Clarifai.App({
     apiKey: 'aa5f028272e1463088b19faa78ebb744'
 });
@@ -155,16 +155,9 @@ app.post('/predict',(req,res)  => {
       res.json('success')
 })*/
 app.get('/test',(req,res) => {
-     checkPass('saied1998').then((isValid) => {
-      if(!isValid){
-          res.json('password is already existed').end()
-          
-      }
-      else{
-        res.json('success')
-      } 
-     })
-
+ 
+      validatePass('Saied1998')
+    
 })
 
 app.listen(process.env.PORT || 3001)

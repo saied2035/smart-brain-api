@@ -30,10 +30,15 @@ const checkPass = async (pass) => {
                :
                   true
 }
-
+const validatePass= (pass) => {
+      const check = /(?=.{8,})(?=.*[a-z])(?=.*[A-Z])^[a-zA-Z]+\d+$/
+      const isValid = check.test(pass)
+      console.log(isValid)
+}
 
 module.exports = {
 	db,
 	smtpTransport,
-	checkPass
+	checkPass,
+  validatePass
 }
