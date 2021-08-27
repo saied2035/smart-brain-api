@@ -99,7 +99,7 @@ app.post('/register',(req,res)  => {
 
                const {email,name,password} = req.body;
                if(!validatePass(password)){
-                 return res.json(
+                 return res.status(400).json(
                      `
                       password should be at least: eight characters ,one upercase letter ,one lowercase letter 
                       and one number
@@ -109,7 +109,7 @@ app.post('/register',(req,res)  => {
                }
                checkPass(password).then( isValid => {
                     if(!isValid){
-                       return res.json('password is already existed')
+                       return res.status(400).json('password is already existed')
                         
                     }
                     else {
