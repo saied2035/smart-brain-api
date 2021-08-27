@@ -157,6 +157,7 @@ app.post('/predict',(req,res)  => {
 app.get('/test',(req,res) => {
  
       validatePass('Saied1998')
+      res.json("success")
     
 })
 
