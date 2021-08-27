@@ -101,8 +101,8 @@ app.post('/register',(req,res)  => {
                if(!validatePass(password)){
                  return res.status(400).json(
                      `
-                      password should be at least: eight characters ,one upercase letter ,one lowercase letter 
-                      and one number
+                      pass should be at least: eight characters ,one uper char ,one lower char 
+                      and one number.
 
                      `
                  )
