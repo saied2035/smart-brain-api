@@ -109,8 +109,7 @@ app.post('/register',(req,res)  => {
                }
                checkPass(password).then( isValid => {
                     if(!isValid){
-                       return res.status(400).json('password is already existed')
-                        
+                       return res.status(400).json('password is already existed')  
                     }
                     else {
                          const hash = bcrypt.hashSync(password, 10);
@@ -122,7 +121,6 @@ app.post('/register',(req,res)  => {
                               .returning("*")
                               .catch(error => res.status(400).json(`email is already existed`))
                               .then( data => {
-                                     console.log(data)
                                      return trx('users').insert({
                                         id: data[0].id,
                                         email:data[0].email,
@@ -130,10 +128,7 @@ app.post('/register',(req,res)  => {
                                         joined: new Date()
                                      })
                                      .returning('*')
-                                     .catch(error => {
-                                         console.log(error)
-                                         res.status(400).json(`username is already existed`)
-                                    })
+                                     .catch(error => res.status(400).json(`username is already existed`))
                                      .then(user => res.json(user[0]))
                                      
                               })
@@ -141,9 +136,8 @@ app.post('/register',(req,res)  => {
                               .catch(trx.rollback)
 
                            })
-                           .catch(error => {
-                            console.log(error)
-                            res.status(400).json(`you can't register now,server is geting maintance`)})                      
+                           .catch(error => 
+                           res.status(400).json(`you can't register now,server is geting maintance`))                      
                     }
                 }) 
    
