@@ -31,7 +31,7 @@ const checkPass = async (pass) => {
                   true
 }
 const validatePass= (pass) => {
-      const check = /(?=.{8,})(?=.*[a-z])(?=.*[A-Z])^[a-zA-Z]+\d+$/
+      const check = /(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])^[a-zA-Z][a-zA-Z0-9]{8,}$/
       return check.test(pass)
 }
 
