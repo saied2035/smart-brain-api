@@ -32,7 +32,7 @@ app.get('/send',(req,res) => {
         <p>
           Hello,Please enter this code in confirmation page :
         </p>
-        <span style="font-size: 1.25rem;color: blue;">${code}</span>
+        <span style="font-size: 20px;color: blue;font-weight:800;">${code}</span>
         </div>`
     }
     console.log(mailOptions);

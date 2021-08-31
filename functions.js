@@ -36,7 +36,7 @@ const validatePass= (pass) => {
 }
 
 const codeGenerator = () => {
-    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    const characters = 'abcd7efg95hi2jklm8n0opq1rstuv6wxyz';
     let result = ""
     const charactersLength = characters.length;
 
