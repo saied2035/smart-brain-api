@@ -35,7 +35,7 @@ const validatePass= (pass) => {
       return check.test(pass)
 }
 
-const code = () => {
+const codeGenerator = () => {
     const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
     let result = ""
     const charactersLength = characters.length;

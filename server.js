@@ -3,7 +3,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const Clarifai = require('clarifai');
-const {db,smtpTransport,checkPass,validatePass,code} = require('./functions')
+const {db,smtpTransport,checkPass,validatePass,codeGenerator} = require('./functions')
 const app1 = new Clarifai.App({
     apiKey: 'aa5f028272e1463088b19faa78ebb744'
 });
@@ -24,7 +24,7 @@ app.get('/',(req,res)  => {
 
 //start
 app.get('/send',(req,res) => {
-    const code =code();
+    const code =codeGenerator();
     const mailOptions={
         from: "smartbrain <saied2421998@gmail.com>",
         to : req.body.email,
