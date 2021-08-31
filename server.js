@@ -21,7 +21,6 @@ app.get('/',(req,res)  => {
      res.send('working!')
 })
 
-
 //start
 app.get('/send',(req,res) => {
     const code =codeGenerator();
@@ -29,8 +28,12 @@ app.get('/send',(req,res) => {
         from: "smartbrain <saied2421998@gmail.com>",
         to : req.body.email,
         subject : "Please confirm your Email account",
-        html : "<div>Hello,Please enter this code in confirmation page :<p>"
-        + code +"</p></div>"
+        html : `<div style="text-align: center;font-size: 1.25rem;font-weight: 600;">
+        <p style="margin-block: 0;margin-block-end: 0.5rem;">
+          Hello,Please enter this code in confirmation page :
+        </p>
+        <span style="font-size: 1.25rem;color: blue;">${code}</span>
+        </div>`
     }
     console.log(mailOptions);
     smtpTransport.sendMail(mailOptions, function(error, response){
