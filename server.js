@@ -25,7 +25,7 @@ app.get('/',(req,res)  => {
 app.get('/send',(req,res) => {
     const code =codeGenerator();
     const mailOptions={
-        from: "smartbrain <smartbrain@uyghng.com>",
+        from: "smartbrain <admin@smartbrain>",
         to : req.body.email,
         subject : "Please confirm your Email account",
         html : `<div style="text-align:center;font-size:20px;font-weight:600;">
