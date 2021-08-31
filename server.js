@@ -29,7 +29,7 @@ app.get('/send',(req,res) => {
         from: "smartbrain <saied2421998@gmail.com>",
         to : req.body.email,
         subject : "Please confirm your Email account",
-        html : "Hello,Please enter this code in confirmation page :<p><span style=`color:red;`>"
+        html : "Hello,Please enter this code in confirmation page :<p><span style='color: red;'>"
         + code + "</span></p>"
     }
     console.log(mailOptions);
