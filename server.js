@@ -3,7 +3,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const Clarifai = require('clarifai');
-const {db,smtpTransport,checkPass,validatePass} = require('./functions')
+const {db,smtpTransport,checkPass,validatePass,code} = require('./functions')
 const app1 = new Clarifai.App({
     apiKey: 'aa5f028272e1463088b19faa78ebb744'
 });
@@ -23,18 +23,14 @@ app.get('/',(req,res)  => {
 
 
 //start
-     let rand,mailOptions,host,link
-app.get('/send',function(req,res){
-      
-    rand=Math.floor((Math.random() * 100) + 54);
-    host=req.get('host');
-    link="https://"+req.get('host')+"/verify?id="+rand;
-    mailOptions={
+app.get('/send',(req,res) => {
+    const code =code();
+    const mailOptions={
         from: "smartbrain <saied2421998@gmail.com>",
-        to : 'semsem_worldcup_2035@yahoo.com',
+        to : req.body.email,
         subject : "Please confirm your Email account",
-        html : "Hello,Please Click on the link to verify your email.<a href="+
-        link+">Click here to verify</a>"
+        html : "Hello,Please enter this code in confirmation page :<p style=`display:block;`>"+
+        code + "</p>"
     }
     console.log(mailOptions);
     smtpTransport.sendMail(mailOptions, function(error, response){
