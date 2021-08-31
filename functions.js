@@ -52,5 +52,5 @@ module.exports = {
 	smtpTransport,
 	checkPass,
   validatePass,
-  code
+  codeGenerator
 }
