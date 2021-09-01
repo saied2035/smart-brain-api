@@ -49,7 +49,7 @@ app.post('/send',(req,res) => {
 });
 });
 
-app.delete('/verify',(req,res) => {
+app.post('/verify',(req,res) => {
     db('codes').select('*').where('code','=',req.body.code)
     .then(data => console.log)
     .then(() => res.json('email verified.'))
