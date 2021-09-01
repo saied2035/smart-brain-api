@@ -19,7 +19,11 @@ const smtpTransport = nodemailer.createTransport({
     }
 });
 const checkEmailIfExist = async (email) => {
-        return await db('users').select('email').where('email','=',email)
+        const check = await db('users').select('email').where('email','=',email)
+        return check.length ?
+           true
+        :
+           false
 }
 const checkPass = async (pass) => {
                data = await db('login').select('hash')
