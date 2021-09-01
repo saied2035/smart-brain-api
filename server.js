@@ -50,7 +50,9 @@ app.post('/send',(req,res) => {
 });
 
 app.delete('/verify',(req,res) => {
-    db('codes').select('*').where('code','=',req.body.code).del()
+    db('codes').select('*').where('code','=',req.body.code)
+    .then(data => console.log)
+    .del()
     .then(() => res.json('email verified.'))
     .catch(err => res.status(400).json('incorrect code.'))
 });
