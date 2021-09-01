@@ -25,7 +25,7 @@ app.get('/',(req,res)  => {
 app.post('/send',async (req,res) => {
     const code =codeGenerator();
     const exist = await checkEmailIfExist(req.body.email)
-    if(exist){
+    if(!exist){
       res.status(400).json(`this email has no account.`)
     }
     const mailOptions={
