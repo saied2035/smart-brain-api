@@ -26,7 +26,7 @@ app.post('/send',async (req,res) => {
     const code =codeGenerator();
     const exist = await checkEmailIfExist(req.body.email)
     if(!exist){
-      res.status(400).json(`this email has no account.`)
+      return res.status(400).json(`this email has no account.`)
     }
     const mailOptions={
         from: "smartbrain <admin@smartbrain>",
