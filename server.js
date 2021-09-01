@@ -49,27 +49,10 @@ app.post('/send',(req,res) => {
 });
 });
 
-app.get('/verify',function(req,res){
-console.log(req.protocol+":/"+req.get('host'));
-if((req.protocol+"://"+req.get('host'))==("https://"+host))
-{
-    console.log("Domain is matched. Information is from Authentic email");
-    console.log(req.query)
-    if(req.query.id==rand)
-    {
-        console.log("email is verified");
-        res.end("Email "+mailOptions.to+" is been Successfully verified");
-    }
-    else
-    {
-        console.log("email is not verified");
-        res.end("Bad Request");
-    }
-}
-else
-{
-    res.end("Request is from unknown source");
-}
+app.delete('/verify',(req,res) => {
+    db('codes').select('*').where('code','=',req.body.code).del()
+    .then(() => res.json('email verified.'))
+    .catch(err => res.status(400).json('incorrect code.'))
 });
 
 //end
