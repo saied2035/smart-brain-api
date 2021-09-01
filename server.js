@@ -57,7 +57,7 @@ app.delete('/verify',(req,res) => {
     db('codes').select('*').where('code','=',req.body.code)
     .then(data => {
       if(data[0].code){
-        return db('users').where('email','=',data[0])
+        return db('users').where('email','=',data[0].email)
                .update({
                  verified: true
                })
