@@ -18,7 +18,9 @@ const smtpTransport = nodemailer.createTransport({
         pass: "saied1998"
     }
 });
-
+const checkEmailIfExist = async (email) => {
+        return await db('users').select('email').where('email','=',email).then((data) => data[0].email )
+}
 const checkPass = async (pass) => {
                data = await db('login').select('hash')
                const existedPasswords = data.filter((user) => {
@@ -50,6 +52,7 @@ const codeGenerator = () => {
 module.exports = {
 	db,
 	smtpTransport,
+  checkEmailIfExist,
 	checkPass,
   validatePass,
   codeGenerator

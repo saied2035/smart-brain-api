@@ -3,7 +3,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const Clarifai = require('clarifai');
-const {db,smtpTransport,checkPass,validatePass,codeGenerator} = require('./functions')
+const {db,smtpTransport,checkEmailIfExist,checkPass,validatePass,codeGenerator} = require('./functions')
 const app1 = new Clarifai.App({
     apiKey: 'aa5f028272e1463088b19faa78ebb744'
 });
@@ -22,8 +22,10 @@ app.get('/',(req,res)  => {
 })
 
 //start
-app.post('/send',(req,res) => {
+app.post('/send',async (req,res) => {
     const code =codeGenerator();
+    const isExist = await checkEmailIfExist(req.body.email)
+    console.log(isExist)
     const mailOptions={
         from: "smartbrain <admin@smartbrain>",
         to : req.body.email,
@@ -53,8 +55,7 @@ app.delete('/verify',(req,res) => {
     db('codes').select('*').where('code','=',req.body.code)
     .then(data => {
       if(data[0].code){
-        return db('codes').select('*').where('code','=',req.body.code).del()
-        .then(() => res.json('email verified.'))
+        return db('users').select('*')
       }
       else{
         return res.json('incorrect code')
