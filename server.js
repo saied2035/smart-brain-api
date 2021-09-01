@@ -22,7 +22,7 @@ app.get('/',(req,res)  => {
 })
 
 //start
-app.get('/send',(req,res) => {
+app.post('/send',(req,res) => {
     const code =codeGenerator();
     const mailOptions={
         from: "smartbrain <admin@smartbrain>",
@@ -35,14 +35,17 @@ app.get('/send',(req,res) => {
         <span style="font-size: 20px;color: blue;font-weight:800;">${code}</span>
         </div>`
     }
-    console.log(mailOptions);
-    smtpTransport.sendMail(mailOptions, function(error, response){
+
+    smtpTransport.sendMail(mailOptions, (error, response) => {
      if(error){
-            console.log(error);
-        res.end("error");
-     }else{
-        res.end("sent");
-         }
+        res.json("error while sending email");
+     }
+     else{
+        db('codes').insert({
+          email : req.body.email,
+          code: code
+        }).then(() => res.json('code sent Successfully'))
+     }
 });
 });
 
