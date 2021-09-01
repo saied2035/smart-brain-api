@@ -57,10 +57,19 @@ app.delete('/verify',(req,res) => {
     db('codes').select('*').where('code','=',req.body.code)
     .then(data => {
       if(data[0].code){
-        return db('users').select('*')
+        return db('users').where('email','=',data[0])
+               .update({
+                 verified: true
+               })
+               .then(() => 
+                       db('codes').where('code','=',req.body.code).del()
+                       .then(() => res.json('email verified'))
+                    )
+
+
       }
       else{
-        return res.json('incorrect code')
+        return res.status(400).json('incorrect code')
       }
     })
     .catch(err => res.status(400).json('incorrect code.'))
