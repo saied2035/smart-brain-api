@@ -53,7 +53,7 @@ app.post('/verify',(req,res) => {
     db('codes').select('*').where('code','=',req.body.code)
     .then(data => console.log)
     .catch(err => res.status(400).json('incorrect code.'))
-    . .then(() => res.json('email verified.'))
+    .then(() => res.json('email verified.'))
 });
 
 //end
