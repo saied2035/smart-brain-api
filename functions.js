@@ -25,8 +25,8 @@ const checkEmailIfExist = async (email) => {
         :
            false
 }
-const checkMsgIfSent = async (code) => {
-        const check = await db('codes').select('code').where('code','=',code)
+const checkMsgIfSent = async (email) => {
+        const check = await db('codes').select('code').where('email','=',email)
         return check.length ?
            true
         :

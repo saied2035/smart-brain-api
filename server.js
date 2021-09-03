@@ -26,7 +26,7 @@ app.get('/',(req,res)  => {
 app.post('/send',async (req,res) => {
     const code =codeGenerator();
     const exist = await checkEmailIfExist(req.body.email)
-    const msgSent = await checkMsgIfSent(code)
+    const msgSent = await checkMsgIfSent(req.body.email)
     if(msgSent){
       return res.status(400).json(`we sent you code before.Check your email.`)
     }
