@@ -25,6 +25,13 @@ const checkEmailIfExist = async (email) => {
         :
            false
 }
+const checkMsgIfSent = async (code) => {
+        const check = await db('codes').select('code').where('code','=',code)
+        return check.length ?
+           true
+        :
+           false
+}
 const checkPass = async (pass) => {
                data = await db('login').select('hash')
                const existedPasswords = data.filter((user) => {
@@ -57,6 +64,7 @@ module.exports = {
 	db,
 	smtpTransport,
   checkEmailIfExist,
+  checkMsgIfSent,
 	checkPass,
   validatePass,
   codeGenerator

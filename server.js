@@ -3,7 +3,8 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const Clarifai = require('clarifai');
-const {db,smtpTransport,checkEmailIfExist,checkPass,validatePass,codeGenerator} = require('./functions')
+const {db,smtpTransport,checkEmailIfExist,checkPass,validatePass
+       ,codeGenerator,checkMsgIfSent} = require('./functions')
 const app1 = new Clarifai.App({
     apiKey: 'aa5f028272e1463088b19faa78ebb744'
 });
@@ -25,6 +26,10 @@ app.get('/',(req,res)  => {
 app.post('/send',async (req,res) => {
     const code =codeGenerator();
     const exist = await checkEmailIfExist(req.body.email)
+    const msgSent = await checkMsgIfSent(code)
+    if(msgSent){
+      return res.status(400).json(`we sent you code before.Check your email.`)
+    }
     if(!exist){
       return res.status(400).json(`this email has no account.`)
     }
