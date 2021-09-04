@@ -68,7 +68,10 @@ app.delete('/verify',(req,res) => {
                })
                .then(() => 
                        db('codes').where('code','=',req.body.code).del()
-                       .then(() => res.json('email verified'))
+                       .then(() => 
+                                db('users').select('*').where('email','=',data[0].email)
+                                .then(user => res.json(user[0])) 
+                            )
                     )
 
 
