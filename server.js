@@ -168,7 +168,7 @@ app.post('/predict',(req,res)  => {
               res.json(data)
             })
             .catch(error => {
-              console.log('error',error)
+              console.log('errorHandlingrequestsaied',error)
               res.status(400).json(error)
             })
 })
