@@ -16,7 +16,7 @@ const app1 = new Clarifai.App({
 const app=express();
 
 app.use(cors());
-app.use(bodyParser.json())
+app.use(express.json({limit: '100mb'}));
 app.enable('trust proxy')
 app.get('/',(req,res)  => {
      res.send('working!')
