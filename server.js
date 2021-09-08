@@ -16,8 +16,8 @@ const app1 = new Clarifai.App({
 
 const app=express();
 
-app.use(cors());
 app.use(express.json({limit: '100mb'}));
+app.use(cors());
 app.enable('trust proxy')
 app.get('/',(req,res)  => {
      res.send('working!')
@@ -158,7 +158,7 @@ app.post('/register',(req,res)  => {
 })
 
 app.post('/predict', async (req,res)  => {
-
+             console.log(req.body)
             const request = Buffer.from(req.body.text, "base64");
             const image= await loadImage(request)
             console.log('imagesaied',image)
