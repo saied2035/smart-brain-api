@@ -170,6 +170,7 @@ app.post('/predict', async (req,res)  => {
               res.json(data)
             })
             .catch(error => {
+              console.log('errorHandlingrequestsaied',error)
               res.status(400).json(error)
             })
 })
