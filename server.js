@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const Clarifai = require('clarifai');
 const {db,smtpTransport,checkEmailIfExist,checkPass,validatePass
        ,codeGenerator,checkMsgIfSent} = require('./functions')
+const {loadImage} = require('canvas')       
 const app1 = new Clarifai.App({
     apiKey: 'aa5f028272e1463088b19faa78ebb744'
 });
@@ -156,11 +157,14 @@ app.post('/register',(req,res)  => {
    
 })
 
-app.post('/predict',(req,res)  => {
+app.post('/predict', async (req,res)  => {
+
+            const request = Buffer.from(req.body.text, "base64");
+            const image= await loadImage(request)
             app1.models
             .predict(
               Clarifai.FACE_DETECT_MODEL,
-              req.body.text      
+              image      
             )
             .then(data => {
               console.log(data)
