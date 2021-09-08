@@ -158,7 +158,6 @@ app.post('/register',(req,res)  => {
 })
 
 app.post('/predict', async (req,res)  => {
-             console.log(req.body)
             const request = Buffer.from(req.body.text, "base64");
             const image= await loadImage(request)
             console.log('imagesaied',image)
@@ -168,11 +167,9 @@ app.post('/predict', async (req,res)  => {
               image      
             )
             .then(data => {
-              console.log('datasaied',data)
               res.json(data)
             })
             .catch(error => {
-              console.log('errorHandlingrequestsaied',error)
               res.status(400).json(error)
             })
 })
