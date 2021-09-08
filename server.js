@@ -164,7 +164,7 @@ app.post('/predict', async (req,res)  => {
             app1.models
             .predict(
               Clarifai.FACE_DETECT_MODEL,
-              request      
+              req.body.text      
             )
             .then(data => {
               res.json(data)
