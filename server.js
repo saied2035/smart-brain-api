@@ -163,8 +163,14 @@ app.post('/predict',(req,res)  => {
               Clarifai.FACE_DETECT_MODEL,
               req.body.text      
             )
-            .then(data => res.json(data))
-            .catch(error => res.status(400).json(true))
+            .then(data => {
+              console.log(data)
+              res.json(data)
+            })
+            .catch(error => {
+              console.log(error)
+              res.status(400).json(error)
+            })
 })
 
 /*app.post('/test',(req,res)  => {
