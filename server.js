@@ -158,22 +158,9 @@ app.post('/register',(req,res)  => {
 })
 
 app.post('/predict', async (req,res)  => {
-            let image
-/*            if(req.body.text.includes('http'||'https')){
-                console.log('urlimage')
-                app1.models
-                .predict(
-                  Clarifai.FACE_DETECT_MODEL,
-                   req.body.text     
-                )
-                .then(data => {
-                  res.json(data)
-                })
-                .catch(error => res.status(400).json(error)) 
-            }*/
-              console.log('deviceimage')
-              const request = Buffer.from(req.body.text, "base64");
-              image= await loadImage(request)             
+            const request = Buffer.from(req.body.text, "base64");
+            const image= await loadImage(request)
+            console.log('imagesaied',image)
             app1.models
             .predict(
               Clarifai.FACE_DETECT_MODEL,
