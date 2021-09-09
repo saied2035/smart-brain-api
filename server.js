@@ -159,7 +159,7 @@ app.post('/register',(req,res)  => {
 
 app.post('/predict', async (req,res)  => {
             let image
-            if(/(jpeg|jpg|gif|png)/.test(req.body.text)){
+            if(req.body.text.includes('http'||'https')){
               image = req.body.text
               console.log('imagesaied',image)
             }
