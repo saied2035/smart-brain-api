@@ -159,7 +159,7 @@ app.post('/register',(req,res)  => {
 
 app.post('/predict', async (req,res)  => {
             let image
-            if(req.body.text.includes('http'||'https')){
+/*            if(req.body.text.includes('http'||'https')){
                 console.log('urlimage')
                 app1.models
                 .predict(
@@ -170,7 +170,7 @@ app.post('/predict', async (req,res)  => {
                   res.json(data)
                 })
                 .catch(error => res.status(400).json(error)) 
-            }
+            }*/
               console.log('deviceimage')
               const request = Buffer.from(req.body.text, "base64");
               image= await loadImage(request)             
