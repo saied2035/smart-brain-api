@@ -167,6 +167,7 @@ app.post('/predict', async (req,res)  => {
               req.body.text     
             )
             .then(data => {
+              console.log('success')
               res.json(data)
             })
             .catch(error => {
