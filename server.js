@@ -158,13 +158,20 @@ app.post('/register',(req,res)  => {
 })
 
 app.post('/predict', async (req,res)  => {
-            const request = Buffer.from(req.body.text, "base64");
-            /*const image= await loadImage(request)*/
-            console.log('imagesaied',request)
+            let image
+            if(/(jpeg|jpg|gif|png)/.test(req.body.text)){
+              image = req.body.text
+            }
+            else {
+              const request = Buffer.from(req.body.text, "base64");
+              image= await loadImage(request) 
+            }  
+
+            console.log('imagesaied',image)
             app1.models
             .predict(
               Clarifai.FACE_DETECT_MODEL,
-              request      
+              image      
             )
             .then(data => {
               res.json(data)
