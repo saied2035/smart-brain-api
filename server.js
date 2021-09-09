@@ -157,7 +157,7 @@ app.post('/register',(req,res)  => {
    
 })
 
-app.post('/predict', async (req,res)  => {
+app.post('/predict',(req,res)  => {
 /*            const request = Buffer.from(req.body.text, "base64");
             const image= await loadImage(request)
             console.log('imagesaied',image)*/
