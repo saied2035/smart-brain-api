@@ -180,8 +180,10 @@ app.post('/predict',async (req,res) => {
               image = await loadImage(req.body.text)
             }
             else{
-               const request = Buffer.from(req.body.image,"base64")
+               const request = Buffer.from(req.body.text,"base64")
+               console.log("request",request)
                image = await loadImage(request)
+               console.log("deviceImage",image)
             }
             console.log("image",image)
             const detection = await faceapi.detectSingleFace(image)
