@@ -177,6 +177,7 @@ app.post('/predict',(req,res)  => async (req,res) => {
             })*/
             const detection = await faceapi.detectSingleFace(req.body.text)
             console.log(detection)
+            res.json('success')
 })
 
 /*app.post('/test',(req,res)  => {
