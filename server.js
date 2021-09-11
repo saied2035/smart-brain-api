@@ -161,7 +161,7 @@ app.post('/register',(req,res)  => {
    
 })
 
-app.post('/predict',(req,res)  => {
+app.post('/predict',(req,res)  => async (req,res) => {
 /*            app1.models
             .predict(
               Clarifai.FACE_DETECT_MODEL,
