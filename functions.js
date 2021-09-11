@@ -60,6 +60,7 @@ const codeGenerator = () => {
 }
 
 
+
 module.exports = {
 	db,
 	smtpTransport,

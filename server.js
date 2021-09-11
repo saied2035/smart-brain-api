@@ -5,20 +5,24 @@ const bodyParser = require('body-parser');
 const Clarifai = require('clarifai');
 const {db,smtpTransport,checkEmailIfExist,checkPass,validatePass
        ,codeGenerator,checkMsgIfSent} = require('./functions')
-const {loadImage} = require('canvas')       
+const {loadImage,Canvas, Image, ImageData} = require('canvas')
+const faceapi = require('@vladmandic/face-api');
+faceapi.env.monkeyPatch({ Canvas, Image, ImageData })      
 const app1 = new Clarifai.App({
     apiKey: 'aa5f028272e1463088b19faa78ebb744'
 });
-
-
-
-
-
+ const loadmodels= async () => {
+  await faceapi.nets.ssdMobilenetv1.loadFromDisk('./model'),
+  await faceapi.nets.ageGenderNet.loadFromDisk('./model'),
+  await faceapi.nets.faceExpressionNet.loadFromDisk('./model')
+ }
 const app=express();
-
 app.use(express.json({limit: '100mb'}));
 app.use(cors());
 app.enable('trust proxy')
+
+loadmodels()
+
 app.get('/',(req,res)  => {
      res.send('working!')
 })
@@ -158,10 +162,7 @@ app.post('/register',(req,res)  => {
 })
 
 app.post('/predict',(req,res)  => {
-/*            const request = Buffer.from(req.body.text, "base64");
-            const image= await loadImage(request)
-            console.log('imagesaied',image)*/
-            app1.models
+/*            app1.models
             .predict(
               Clarifai.FACE_DETECT_MODEL,
               req.body.text     
@@ -173,7 +174,9 @@ app.post('/predict',(req,res)  => {
             .catch(error => {
               console.log('errorHandlingrequestsaied',error)
               res.status(400).json(error)
-            })
+            })*/
+            const detection = await faceapi.detectSingleFace(req.body.text)
+            console.log(detection)
 })
 
 /*app.post('/test',(req,res)  => {
