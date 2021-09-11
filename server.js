@@ -181,14 +181,10 @@ app.post('/predict',async (req,res) => {
             }
             else{
                const request = Buffer.from(req.body.text,"base64")
-               console.log("request",request)
                image = await loadImage(request)
-               console.log("deviceImage",image)
             }
-            console.log("image",image)
             const detection = await faceapi.detectSingleFace(image)
-            console.log("result",detection)
-            res.json('success')
+            res.json(detection)
 })
 
 /*app.post('/test',(req,res)  => {
