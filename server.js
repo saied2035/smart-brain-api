@@ -162,7 +162,7 @@ app.post('/register',(req,res)  => {
 })
 
 app.post('/predict',async (req,res) => {
-/*            app1.models
+            app1.models
             .predict(
               Clarifai.FACE_DETECT_MODEL,
               req.body.text     
@@ -174,9 +174,9 @@ app.post('/predict',async (req,res) => {
             .catch(error => {
               console.log('errorHandlingrequestsaied',error)
               res.status(400).json(error)
-            })*/
+            })
             
-            let image
+/*            let image
             if(req.body.text.includes('http') || req.body.text.includes('https')){
               image = await loadImage(req.body.text)
             }
@@ -185,7 +185,7 @@ app.post('/predict',async (req,res) => {
                image = await loadImage(request)
             }
             const detection = await faceapi.detectSingleFace(image)
-            res.json(detection)
+            res.json(detection)*/
 })
 
 /*app.post('/test',(req,res)  => {
