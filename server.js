@@ -175,7 +175,14 @@ app.post('/predict',async (req,res) => {
               console.log('errorHandlingrequestsaied',error)
               res.status(400).json(error)
             })*/
-            const image = await loadImage(req.body.text)
+            let image
+            if(req.body.text.includes('http') || req.body.text.includes('https')){
+              image = await loadImage(req.body.text)
+            }
+            else{
+               const request = Buffer.from(req.body.image,"base64")
+               image = await loadImage(request)
+            }
             console.log("image",image)
             const detection = await faceapi.detectSingleFace(image)
             console.log("result",detection)
