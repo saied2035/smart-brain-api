@@ -4,7 +4,7 @@ const fs = require('fs')
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const Clarifai = require('clarifai');
-const sharp = require('sharp')
+const jimp = requir('jimp')
 const {db,smtpTransport,checkEmailIfExist,checkPass,validatePass
        ,codeGenerator,checkMsgIfSent} = require('./functions')
 const {loadImage,Canvas, Image, ImageData} = require('canvas')
@@ -177,15 +177,14 @@ app.post('/predict',async (req,res) => {
               console.log('errorHandlingrequestsaied',error)
               res.status(400).json(error)
             })*/
-            console.log('image',req.body.text)
             console.log('imageWidth',req.body.imageWidth)
+            const test = await jimp.read(req.body.text)
+            console.log(test)
             let image
             if(req.body.text.includes('http') || req.body.text.includes('https')){
               image = await loadImage(req.body.text)
             }
-            else{
-              sharp(req.body.text).resize({width:Math.round(0.28*req.body.imageWidth)})
-              .toBuffer().then(data => console.log(data))               
+            else{             
                const request = Buffer.from(req.body.text,"base64")
                image = await loadImage(request)
             }
