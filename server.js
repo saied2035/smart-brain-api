@@ -4,7 +4,7 @@ const fs = require('fs')
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const Clarifai = require('clarifai');
-const jimp = requir('jimp')
+const jimp = require('jimp')
 const {db,smtpTransport,checkEmailIfExist,checkPass,validatePass
        ,codeGenerator,checkMsgIfSent} = require('./functions')
 const {loadImage,Canvas, Image, ImageData} = require('canvas')
