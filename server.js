@@ -178,14 +178,16 @@ app.post('/predict',async (req,res) => {
               res.status(400).json(error)
             })*/
             console.log('imageWidth',req.body.imageWidth)
-            const test = await jimp.read(req.body.text)
-            console.log(test)
             let image
             if(req.body.text.includes('http') || req.body.text.includes('https')){
+              const test = await jimp.read(req.body.text)
+              console.log(test)              
               image = await loadImage(req.body.text)
             }
             else{             
                const request = Buffer.from(req.body.text,"base64")
+               const test = await jimp.read(request)
+               console.log(test)
                image = await loadImage(request)
             }
             const detection = await faceapi.detectSingleFace(image)
