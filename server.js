@@ -184,6 +184,7 @@ app.post('/predict',async (req,res) => {
               await test.resize(Math.round(0.28*req.body.imageWidth),jimp.AUTO)
               test.getBuffer(jimp.MIME_PNG, async (err, buffer) => {
                  const image =  await loadImage(buffer)
+                 console.log(image)
                });
             }
             else{             
@@ -192,9 +193,10 @@ app.post('/predict',async (req,res) => {
                await test.resize(Math.round(0.28*req.body.imageWidth),jimp.AUTO)
                test.getBuffer(jimp.MIME_PNG, async (err, buffer) => {
                  const image =  await loadImage(buffer)
+                 console.log(image)
                });                
             }
-            console.log(image)
+
             const detection = await faceapi.detectSingleFace(image)
             
             res.json(detection)
