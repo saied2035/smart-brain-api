@@ -182,8 +182,7 @@ app.post('/predict',async (req,res) => {
             if(req.body.text.includes('http') || req.body.text.includes('https')){
               const test = await jimp.read(req.body.text)
               await test.resize(Math.round(0.28*req.body.imageWidth),jimp.AUTO)
-              const test1 = await loadImage(test)  
-              console.log(test1)
+              const test1 = await loadImage(test)
               image = await loadImage(req.body.text)
             }
             else{             
@@ -191,7 +190,6 @@ app.post('/predict',async (req,res) => {
                const test = await jimp.read(request)
                await test.resize(Math.round(0.28*req.body.imageWidth),jimp.AUTO)
                const test1 = await loadImage(test)  
-               console.log(test1)
                image = await loadImage(request)
             }
             const detection = await faceapi.detectSingleFace(image)
