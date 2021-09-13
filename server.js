@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs')
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const Clarifai = require('clarifai');
@@ -178,6 +179,8 @@ app.post('/predict',async (req,res) => {
             
             let image
             if(req.body.text.includes('http') || req.body.text.includes('https')){
+              const request =fs.readFileSync(req.body.text)
+              console.log(request)
               image = await loadImage(req.body.text)
             }
             else{
