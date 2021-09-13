@@ -22,7 +22,8 @@
     "knex": "^0.21.21",
     "latest-version": "^6.0.0",
     "nodemailer": "^6.6.3",
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "sharp": "^0.29.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
