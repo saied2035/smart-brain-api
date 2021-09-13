@@ -180,13 +180,13 @@ app.post('/predict',async (req,res) => {
             console.log('imageWidth',req.body.imageWidth)
             let image
             if(req.body.text.includes('http') || req.body.text.includes('https')){
-              const test = await jimp.read(req.body.text)
+              const test = await jimp.read(req.body.text).resize(Math.round(0.28*req.body.imageWidth),jimp.AUTO)
               console.log(test)              
               image = await loadImage(req.body.text)
             }
             else{             
                const request = Buffer.from(req.body.text,"base64")
-               const test = await jimp.read(request)
+               const test = await jimp.read(request).resize(Math.round(0.28*req.body.imageWidth),jimp.AUTO)
                console.log(test)
                image = await loadImage(request)
             }
