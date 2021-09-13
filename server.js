@@ -181,7 +181,7 @@ app.post('/predict',async (req,res) => {
             console.log('imageWidth',req.body.imageWidth)
             let image
             if(req.body.text.includes('http') || req.body.text.includes('https')){
-              sharp(req.body.text).resize({width:0.28*req.body.imageWidth})
+              sharp(req.body.text).resize({width:Math.round(0.28*req.body.imageWidth)})
               .toBuffer().then(data => console.log(data))
               image = await loadImage(req.body.text)
             }
