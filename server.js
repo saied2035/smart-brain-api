@@ -193,7 +193,7 @@ app.post('/predict',async (req,res) => {
                const request = Buffer.from(req.body.text,"base64")
                const test = await jimp.read(request)
                await test.resize(Math.round(0.28*req.body.imageWidth),jimp.AUTO)
-               test.getBuffer(jimp.MIME_PNG, (err, buffer) => {
+               test.getBuffer(jimp.MIME_PNG, async (err, buffer) => {
                  const test1 =  await loadImage(buffer)
                    console.log('desiredImage',test1)
                });
