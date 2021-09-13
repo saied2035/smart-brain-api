@@ -182,10 +182,10 @@ app.post('/predict',async (req,res) => {
             let image
             if(req.body.text.includes('http') || req.body.text.includes('https')){
               image = await loadImage(req.body.text)
-              sharp(image).resize({width:Math.round(0.28*req.body.imageWidth)})
-              .toBuffer().then(data => console.log(data))
             }
             else{
+              sharp(req.body.text).resize({width:Math.round(0.28*req.body.imageWidth)})
+              .toBuffer().then(data => console.log(data))               
                const request = Buffer.from(req.body.text,"base64")
                image = await loadImage(request)
             }
