@@ -194,6 +194,7 @@ app.post('/predict',async (req,res) => {
                  const image =  await loadImage(buffer)
                });                
             }
+            console.log(image)
             const detection = await faceapi.detectSingleFace(image)
             
             res.json(detection)
