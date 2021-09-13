@@ -182,8 +182,9 @@ app.post('/predict',async (req,res) => {
             if(req.body.text.includes('http') || req.body.text.includes('https')){
               const test = await jimp.read(req.body.text)
               await test.resize(Math.round(0.28*req.body.imageWidth),jimp.AUTO)
-              test.getBuffer(jimp.MIME_PNG, (err, buffer) => {
-                 console.log(buffer);
+              test.getBuffer(jimp.MIME_PNG, async (err, buffer) => {
+                 const test1 =  await loadImage(buffer)
+                   console.log('desiredImage',test1)
                });
                console.log(test)              
               image = await loadImage(req.body.text)
@@ -193,7 +194,8 @@ app.post('/predict',async (req,res) => {
                const test = await jimp.read(request)
                await test.resize(Math.round(0.28*req.body.imageWidth),jimp.AUTO)
                test.getBuffer(jimp.MIME_PNG, (err, buffer) => {
-                 console.log(buffer);
+                 const test1 =  await loadImage(buffer)
+                   console.log('desiredImage',test1)
                });
                console.log(test)                
                image = await loadImage(request)
