@@ -184,7 +184,7 @@ app.post('/predict',async (req,res) => {
             }
               const readImage = await jimp.read(receviedImage)
               await readImage.resize(Math.round(0.28*req.body.imageWidth),jimp.AUTO)
-              const resizedImage = await test.getBuffer(jimp.MIME_PNG,  (err, buffer) => buffer)
+              const resizedImage = await readImage.getBuffer(jimp.MIME_PNG,  (err, buffer) => buffer)
               console.log(resizedImage)
               const image =  await loadImage(resizedImage)
               const detection = await faceapi.detectSingleFace(image) 
