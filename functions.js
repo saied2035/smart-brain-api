@@ -1,6 +1,5 @@
 const nodemailer = require("nodemailer")
 const bcrypt = require('bcrypt');
-/*const jimp = require('jimp')*/
 const knex = require('knex');
 
  const db = knex({
@@ -60,11 +59,6 @@ const codeGenerator = () => {
     return result
 }
 
-/*const resizeImage = async (image,imageWidth) => {
-              const readImage = await jimp.read(image)
-              await readImage.resize(Math.round(0.28*req.body.imageWidth),jimp.AUTO)
-              
-}*/
 
 module.exports = {
 	db,
