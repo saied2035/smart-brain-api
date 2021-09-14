@@ -173,6 +173,7 @@ app.post('/predict',async (req,res) => {
               readImage.getBuffer(jimp.MIME_PNG,  async (err, buffer) => {
                       const image =  await loadImage(buffer)
                       const detection = await faceapi.detectSingleFace(image).withFaceExpressions()
+                      console.log(detection.toString())
                       console.log(detection) 
                       res.json(detection) 
               })
