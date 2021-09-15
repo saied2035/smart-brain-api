@@ -174,7 +174,12 @@ app.post('/predict',async (req,res) => {
                       const image =  await loadImage(buffer)
                       const detection = await faceapi.detectSingleFace(image).withFaceExpressions().withAgeAndGender()
                       console.log(detection) 
-                      res.json(detection) 
+                      if(!detection.detection){
+                         res.json({})  
+                      }
+                      else{
+                        res.json(detection)
+                      } 
               })
 
 
