@@ -15,7 +15,7 @@ const smtpTransport = nodemailer.createTransport({
     service: "gmail",
     auth: {
         user: "saied2421998@gmail.com",
-        pass: "saied1998"
+        pass: "JSisthebest2021"
     }
 });
 const checkEmailIfExist = async (email) => {
