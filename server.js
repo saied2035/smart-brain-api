@@ -54,7 +54,8 @@ app.post('/send',async (req,res) => {
 
     smtpTransport.sendMail(mailOptions, (error, response) => {
      if(error){
-        res.json("error while sending email");
+        console.log(error)
+        res.status(400).json("error while sending email");
      }
      else{
         db('codes').insert({
