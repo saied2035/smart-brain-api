@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs')
-const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');     
 const {
     userSignIn,
