@@ -1,6 +1,7 @@
 const {db,smtpTransport,checkEmailIfExist,checkPass,validatePass
        ,codeGenerator,checkMsgIfSent} = require('./functions')
 const bcrypt = require('bcrypt');
+const jimp = require('jimp')
 const {loadImage,Canvas, Image, ImageData} = require('canvas')
 const faceapi = require('@vladmandic/face-api');
 faceapi.env.monkeyPatch({ Canvas, Image, ImageData })
