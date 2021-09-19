@@ -29,7 +29,9 @@ const userSignIn= (req,res) => {
                res.status(400).json('password is wrong')
             }
            })
-           .catch(error => res.status(400).json(`email is wrong or you don't have an account`))	
+           .catch(error => {
+           	console.log(error)
+           	res.status(400).json(`email is wrong or you don't have an account`)})	
 }
 
 const userRegister = (req,res) => {
