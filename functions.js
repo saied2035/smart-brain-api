@@ -2,6 +2,11 @@ const nodemailer = require("nodemailer")
 const bcrypt = require('bcrypt');
 const knex = require('knex');
 
+ const loadModels= async () => {
+  await faceapi.nets.ssdMobilenetv1.loadFromDisk('./model'),
+  await faceapi.nets.ageGenderNet.loadFromDisk('./model'),
+  await faceapi.nets.faceExpressionNet.loadFromDisk('./model')
+ }
  const db = knex({
   client: 'pg',
   connection: {
@@ -67,5 +72,6 @@ module.exports = {
   checkMsgIfSent,
 	checkPass,
   validatePass,
-  codeGenerator
+  codeGenerator,
+  loadModels
 }
