@@ -12,7 +12,7 @@ faceapi.env.monkeyPatch({ Canvas, Image, ImageData })
  }
 
 const userSignIn= (req,res) => {
-
+           console.log(req.body)
            if(Object.values(req.body).includes("")){
              return res.json('please complete all the fields')
            }
