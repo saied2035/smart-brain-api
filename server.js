@@ -2,18 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs')
 const bcrypt = require('bcrypt');
-const bodyParser = require('body-parser');
-const {loadImage,Canvas, Image, ImageData} = require('canvas')
-const faceapi = require('@vladmandic/face-api');
-faceapi.env.monkeyPatch({ Canvas, Image, ImageData })      
-const {loadModels} = require('./functions.js')
+const bodyParser = require('body-parser');     
 const {
-
     userSignIn,
     userRegister,
     sendEmail,
     verifyEmail,
-    imagePredict
+    imagePredict,
+    loadModels
 }  = require('./controllers.js')
 
 const app=express();

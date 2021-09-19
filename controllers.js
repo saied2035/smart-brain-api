@@ -1,6 +1,15 @@
 const {db,smtpTransport,checkEmailIfExist,checkPass,validatePass
        ,codeGenerator,checkMsgIfSent} = require('./functions')
 
+const {loadImage,Canvas, Image, ImageData} = require('canvas')
+const faceapi = require('@vladmandic/face-api');
+faceapi.env.monkeyPatch({ Canvas, Image, ImageData })
+
+ const loadModels= async () => {
+  await faceapi.nets.ssdMobilenetv1.loadFromDisk('./model'),
+  await faceapi.nets.ageGenderNet.loadFromDisk('./model'),
+  await faceapi.nets.faceExpressionNet.loadFromDisk('./model')
+ }
 
 const userSignIn= (req,res) => {
 
@@ -160,5 +169,6 @@ module.exports ={
     userRegister,
     sendEmail,
     verifyEmail,
-    imagePredict
+    imagePredict,
+    loadModels
 }
