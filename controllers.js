@@ -1,4 +1,4 @@
-const {db,smtpTransport,checkEmailIfExist,checkPass,validatePass
+const {db,client,checkEmailIfExist,checkPass,validatePass
        ,codeGenerator,checkMsgIfSent} = require('./functions')
 const bcrypt = require('bcrypt');
 const jimp = require('jimp')
@@ -97,18 +97,21 @@ const sendEmail= async (req,res) => {
       return res.status(400).json(`this email has no account.`)
     }
     const mailOptions={
-        from: "smartbrain <admin@smartbrain>",
+        from: "smartbrain <saied2421998@finmail.com>",
         to : req.body.email,
         subject : "Please confirm your Email account",
-        html : `<div style="text-align:center;font-size:20px;font-weight:600;">
+        HtmlBody : `<div style="text-align:center;font-size:20px;font-weight:600;">
         <p>
           Hello,Please enter this code in confirmation page :
         </p>
         <span style="font-size: 20px;color: blue;font-weight:800;">${code}</span>
-        </div>`
+        </div>`,
+        "MessageStream": "outbound"
     }
 
-    smtpTransport.sendMail(mailOptions, (error, response) => {
+    client.sendEmail(mailOptions, (error, response) => {
+        console.log('error', error)
+        console.log('response', response)
      if(error){
         console.log(error)
         res.status(400).json("error while sending email");

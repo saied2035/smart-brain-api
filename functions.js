@@ -1,22 +1,16 @@
-const nodemailer = require("nodemailer")
+const postmark = require("postmark");
 const bcrypt = require('bcrypt');
 const knex = require('knex');
- const db = knex({
+const db = knex({
   client: 'pg',
   connection: {
-	  connectionString: process.env.DATABASE_URL,
-	  ssl: {
-	    rejectUnauthorized: false
-	  }
+      connectionString: process.env.DATABASE_URL,
+      ssl: {
+        rejectUnauthorized: false
+      }
   }
 });
-const smtpTransport = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: "saied2421998@gmail.com",
-        pass: "JSisthebest2021"
-    }
-});
+const client = new postmark.ServerClient("c7d91831-0112-4aaf-a7f5-1a342448b5b7");
 const checkEmailIfExist = async (email) => {
         const check = await db('users').select('email').where('email','=',email)
         return check.length ?
@@ -61,7 +55,7 @@ const codeGenerator = () => {
 
 module.exports = {
 	db,
-	smtpTransport,
+	client,
   checkEmailIfExist,
   checkMsgIfSent,
 	checkPass,
