@@ -13,7 +13,6 @@ faceapi.env.monkeyPatch({ Canvas, Image, ImageData })
  }
 
 const userSignIn= (req,res) => {
-           console.log(req.body)
            if(Object.values(req.body).includes("")){
              return res.json('please complete all the fields')
            }
@@ -31,7 +30,6 @@ const userSignIn= (req,res) => {
             }
            })
            .catch(error => {
-           	console.log(error)
            	res.status(400).json(`email is wrong or you don't have an account`)})	
 }
 
@@ -110,10 +108,7 @@ const sendEmail= async (req,res) => {
     }
 
     client.sendEmail(mailOptions, (error, response) => {
-        console.log('error', error)
-        console.log('response', response)
      if(error){
-        console.log(error)
         res.status(400).json("error while sending email");
      }
      else{
@@ -157,7 +152,6 @@ const imagePredict = async (req,res) =>{
                 receviedImage = Buffer.from(req.body.text,"base64")
             }
               const readImage = await jimp.read(receviedImage)
-              await readImage.resize(Math.round(0.3*req.body.imageWidth),jimp.AUTO)
               readImage.getBuffer(jimp.MIME_PNG,  async (err, buffer) => {
                       const image =  await loadImage(buffer)
                       const detection = await faceapi.detectSingleFace(image).withFaceExpressions()
