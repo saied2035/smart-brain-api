@@ -10,7 +10,7 @@ const db = knex({
       }
   }
 });
-const client = new postmark.ServerClient("c7d91831-0112-4aaf-a7f5-1a342448b5b7");
+const client = new postmark.ServerClient(process.env.EMAIL_API_KEY);
 const checkEmailIfExist = async (email) => {
         const check = await db('users').select('email').where('email','=',email)
         return check.length ?
