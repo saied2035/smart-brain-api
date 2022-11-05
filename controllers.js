@@ -151,8 +151,15 @@ const imagePredict = async (req,res) =>{
             if(!req.body.text.includes('http') || !req.body.text.includes('https')){
                 receviedImage = Buffer.from(req.body.text,"base64")
             }
-              const readImage = await jimp.read(receviedImage)
-              readImage.getBuffer(jimp.MIME_PNG,  async (err, buffer) => {
+            let readImage = null
+            try {
+              readImage = await jimp.read(receviedImage)
+            }
+            catch {
+              res.json({ error: 'Unsupported Image Type. Supported types are bmp, gif, jpeg, jpg, png, and tiff' })
+              return;
+            }  
+            readImage.getBuffer(jimp.MIME_PNG,  async (err, buffer) => {
                       const image =  await loadImage(buffer)
                       const detection = await faceapi.detectSingleFace(image).withFaceExpressions()
                                                      .withAgeAndGender()
