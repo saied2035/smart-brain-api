@@ -1,4 +1,4 @@
-const postmark = require("postmark");
+const SibApiV3Sdk = require('sib-api-v3-sdk');
 const bcrypt = require('bcrypt');
 const knex = require('knex');
 const db = knex({
@@ -10,7 +10,10 @@ const db = knex({
       }
   }
 });
-const client = new postmark.ServerClient(process.env.EMAIL_API_KEY);
+const defaultClient = SibApiV3Sdk.ApiClient.instance;
+const apiKey = defaultClient.authentications['api-key'];
+apiKey.apiKey = process.env.EMAIL_API_KEY;
+const client = new SibApiV3Sdk.TransactionalEmailsApi();
 const checkEmailIfExist = async (email) => {
         const check = await db('users').select('email').where('email','=',email)
         return check.length ?

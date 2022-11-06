@@ -1,5 +1,6 @@
 const {db,client,checkEmailIfExist,checkPass,validatePass
        ,codeGenerator,checkMsgIfSent} = require('./functions')
+const SibApiV3Sdk = require('sib-api-v3-sdk');       
 const bcrypt = require('bcrypt');
 const jimp = require('jimp')
 const {loadImage,Canvas, Image, ImageData} = require('canvas')
@@ -94,30 +95,27 @@ const sendEmail= async (req,res) => {
     if(!exist){
       return res.status(400).json(`this email has no account.`)
     }
-    const mailOptions={
-        from: "smartbrain <saied2421998@finmail.com>",
-        to : req.body.email,
-        subject : "Please confirm your Email account",
-        HtmlBody : `<div style="text-align:center;font-size:20px;font-weight:600;">
+    let mailOptions = new SibApiV3Sdk.SendSmtpEmail();
+    mailOptions = {
+        sender: {email: 'saied2421998@gmail.com', name: 'smartbrain' },
+        to: [{ email: req.body.email }],
+        subject: "Confirmation mail for smartbrain",
+        htmlContent: `<div style="text-align:center;font-size:20px;font-weight:600;">
         <p>
-          Hello,Please enter this code in confirmation page :
+          Hello, Please enter this code in confirmation page :
         </p>
         <span style="font-size: 20px;color: blue;font-weight:800;">${code}</span>
         </div>`,
         "MessageStream": "outbound"
     }
 
-    client.sendEmail(mailOptions, (error, response) => {
-     if(error){
-        res.status(400).json("error while sending email");
-     }
-     else{
+    client.sendTransacEmail(mailOptions)
+    .then(response =>  {
         db('codes').insert({
           email : req.body.email,
           code: code
         }).then(() => res.json('code sent Successfully'))
-     }
-    });
+    }).catch(error => res.status(400).json("error while sending email"))
 }
 
 const verifyEmail= (req,res) => {
