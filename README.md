@@ -12,7 +12,7 @@
 
 ## Live Demo
 
-- [Live Demo](saied2035.github.io/smartbrain/)
+- [Live Demo](https://saied2035.github.io/smartbrain/)
 
 ## front-end Repository
 
