@@ -16,7 +16,7 @@
 
 ## front-end Repository
 
-- [smartbrain API](https://github.com/saied2035/smartbrain)
+- [smartbrain](https://github.com/saied2035/smartbrain)
 
 ## Getting Started
 
