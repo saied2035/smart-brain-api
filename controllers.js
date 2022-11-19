@@ -35,6 +35,8 @@ const userSignIn= (req,res) => {
 }
 
 const userRegister = (req,res) => {
+               console.log('req.body', req.body)
+               console.log('Object.values(req.body)', Object.values(req.body))
                if(Object.values(req.body).includes("")){
                 return res.json('please complete all the fields')
                }
@@ -42,11 +44,8 @@ const userRegister = (req,res) => {
                const {email,name,password} = req.body;
                if(!validatePass(password)){
                  return res.status(400).json(
-                     `
-                      password should be at least: eight characters ,one upercase letter ,one lowercase letter 
-                      and one number
-
-                     `
+                   'Password should have at least eight characters, one uppercase letter.' + 
+                   ' Allowed special letters are ( _ or . or @ )'
                  )
                }
                checkPass(password).then( isValid => {
