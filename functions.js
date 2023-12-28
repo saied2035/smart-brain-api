@@ -1,15 +1,9 @@
 const SibApiV3Sdk = require('sib-api-v3-sdk');
 const bcrypt = require('bcrypt');
+const environment = process.env.NODE_ENV || 'development';
+const config = require('./knexfile')[environment];
 const knex = require('knex');
-const db = knex({
-  client: 'pg',
-  connection: {
-      connectionString: process.env.DATABASE_URL,
-      ssl: {
-        rejectUnauthorized: false
-      }
-  }
-});
+const db = knex(config);
 const defaultClient = SibApiV3Sdk.ApiClient.instance;
 const apiKey = defaultClient.authentications['api-key'];
 apiKey.apiKey = process.env.EMAIL_API_KEY;
@@ -39,6 +33,7 @@ const checkPass = async (pass) => {
                :
                   true
 }
+
 const validatePass= (pass) => {
       const check = /(?=.*[A-Z])[a-zA-Z0-9_.@]{8,}$/
       return check.test(pass)

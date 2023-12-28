@@ -11,19 +11,24 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tensorflow/tfjs-node": "^3.21.1",
-    "@vladmandic/face-api": "^1.7.6",
+    "@tensorflow/tfjs-node": "^4.13.0",
+    "@vladmandic/face-api": "^1.7.12",
     "bcrypt": "^5.0.1",
     "canvas": "^2.8.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
-    "jimp": "^0.16.1",
-    "knex": "^0.95.14",
+    "jimp": "^0.22.10",
+    "knex": "^3.0.1",
     "pg": "^8.7.1",
     "sib-api-v3-sdk": "^8.4.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^3.0.1"
+  },
+  "overrides": {
+    "jimp": {
+      "xml2js": "^0.5.0"
+    }
   }
 }

@@ -19,7 +19,7 @@ const userSignIn= (req,res) => {
            }
            db('login').select('*').where('email','=',req.body.email)
            .then(data => {
-            const isValid= bcrypt.compareSync(req.body.password, data[0].hash);
+            const isValid = bcrypt.compareSync(req.body.password, data[0].hash);
             if (isValid){
              return db('users').select('*').where('email','=',req.body.email)
               .then(user => {
@@ -30,19 +30,17 @@ const userSignIn= (req,res) => {
                res.status(400).json('password is wrong')
             }
            })
-           .catch(error => {
+           .catch(() => {
            	res.status(400).json(`email is wrong or you don't have an account`)})	
 }
 
 const userRegister = (req,res) => {
-               console.log('req.body', req.body)
-               console.log('Object.values(req.body)', Object.values(req.body))
                if(Object.values(req.body).includes("")){
                 return res.json('please complete all the fields')
                }
 
-               const {email,name,password} = req.body;
-               if(!validatePass(password)){
+               const { email, name, password } = req.body;
+               if (!validatePass(password)) {
                  return res.status(400).json(
                    'Password should have at least eight characters, one uppercase letter.' + 
                    ' Allowed special letters are ( _ or . or @ )'
@@ -60,16 +58,16 @@ const userRegister = (req,res) => {
                                    hash : hash
                               })
                               .returning("*")
-                              .catch(error => res.status(400).json(`email is already existed`))
-                              .then( data => {
+                              .catch(() => res.status(400).json(`email is already existed`))
+                              .then(data => {
                                      return trx('users').insert({
                                         id: data[0].id,
-                                        email:data[0].email,
+                                        email: data[0].email,
                                         name: name,
                                         joined: new Date()
                                      })
                                      .returning('*')
-                                     .catch(error => res.status(400).json(`username is already existed`))
+                                     .catch(() => res.status(400).json(`username is already existed`))
                                      .then(user => res.json(user[0]))
                                      
                               })
@@ -77,7 +75,7 @@ const userRegister = (req,res) => {
                               .catch(trx.rollback)
 
                            })
-                           .catch(error => 
+                           .catch(() => 
                            res.status(400).json(`you can't register now,server is geting maintance`))                      
                     }
                 })	
@@ -85,11 +83,11 @@ const userRegister = (req,res) => {
 
 const sendEmail= async (req,res) => {
 
-    const code =codeGenerator();
+    const code = codeGenerator();
     const exist = await checkEmailIfExist(req.body.email)
     const msgSent = await checkMsgIfSent(req.body.email)
     if(msgSent){
-      return res.status(400).json(`we sent you code before.Check your email.`)
+      return res.status(400).json(`we sent you code before. Check your email.`)
     }
     if(!exist){
       return res.status(400).json(`this email has no account.`)
@@ -98,10 +96,10 @@ const sendEmail= async (req,res) => {
     mailOptions = {
         sender: {email: 'saied2421998@gmail.com', name: 'smartbrain' },
         to: [{ email: req.body.email }],
-        subject: "Confirmation mail for smartbrain",
+        subject: "Confirmation mail from Smart brain",
         htmlContent: `<div style="text-align:center;font-size:20px;font-weight:600;">
         <p>
-          Hello, Please enter this code in confirmation page :
+          Hello, Please enter this code on the confirmation page:
         </p>
         <span style="font-size: 20px;color: blue;font-weight:800;">${code}</span>
         </div>`,
@@ -109,12 +107,12 @@ const sendEmail= async (req,res) => {
     }
 
     client.sendTransacEmail(mailOptions)
-    .then(response =>  {
+    .then(() =>  {
         db('codes').insert({
           email : req.body.email,
           code: code
         }).then(() => res.json('code sent Successfully'))
-    }).catch(error => res.status(400).json("error while sending email"))
+    }).catch(() => res.status(400).json("error while sending email"))
 }
 
 const verifyEmail= (req,res) => {
@@ -135,11 +133,11 @@ const verifyEmail= (req,res) => {
 
 
       }
-      else{
+      else {
         return res.status(400).json('incorrect code')
       }
     })
-    .catch(err => res.status(400).json('incorrect code.'))
+    .catch(() => res.status(400).json('incorrect code.'))
 }
 
 const imagePredict = async (req,res) =>{
