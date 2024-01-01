@@ -12,8 +12,6 @@ const {
     loadModels
 }  = require('./controllers.js')
 
-console.log("working!");
-console.log(process.env.PRODUCTION_DATABASE_URL);
 const app=express();
 app.use(express.json({limit: '100mb'}));
 app.use(cors());
