@@ -33,7 +33,7 @@ for https:
 
 ### Usage
   run 
- `npm start` for devlopment
+ `npm start:dev` for devlopment
  `npm run build` for production code
 
 ## Authors
