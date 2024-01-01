@@ -18,6 +18,8 @@ app.use(cors());
 
 loadModels()
 
+app.get('/', (_, res) => res.sendStatus(200) )
+
 app.post('/signin',(req,res)  => userSignIn(req,res))
 
 app.post('/register',(req,res)  => userRegister(req,res))
